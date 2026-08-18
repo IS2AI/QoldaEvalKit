@@ -530,11 +530,6 @@ Serving on a non-default port:
 API_BASE=http://localhost:8003/v1 MODEL_NAME=qolda-think ./run_eval.sh
 ```
 
-A server on another machine:
-
-```bash
-API_BASE=http://gpu-node-04:8000/v1 MODEL_NAME=qolda-think ./run_eval.sh
-```
 
 ### 9.3 Sampling
 
