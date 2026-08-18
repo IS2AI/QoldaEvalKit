@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Serve a model with vLLM for KazakhEvalKit. See README.md.
+# Serve a model with vLLM for QoldaEvalKit. See README.md.
 #
 #   ./serve_model.sh
 #   MODEL_PATH=/path/to/qolda-avl-5b PORT=8008 ./serve_model.sh
