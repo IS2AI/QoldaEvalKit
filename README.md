@@ -1,4 +1,4 @@
-# KazakhEvalKit
+# QoldaEvalKit
 
 A multi-modal evaluation harness for LLMs served through vLLM, built around
 Kazakh and its English and Russian counterparts.
