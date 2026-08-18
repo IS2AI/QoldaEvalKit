@@ -1,0 +1,40 @@
+# XCOMET — the neural translation metric. INSTALL IN A SEPARATE ENVIRONMENT.
+#
+#     python -m venv .venv-xcomet && . .venv-xcomet/bin/activate
+#     pip install -r requirements-xcomet.txt
+#
+# Do not install this alongside requirements.txt. unbabel-comet requires
+# huggingface-hub<1.0, transformers<5.0 and numpy<2.0, while transformers 5.x
+# requires huggingface-hub>=1.5. pip resolves that by downgrading numpy and
+# transformers, which breaks datasets and the harness with it.
+#
+# How to use both, without either breaking the other:
+#
+#   1. In the main environment, generate the translations without scoring:
+#        MODALITY=none TRANSLATION_EVAL=true XCOMET=false ... ./run_eval.sh
+#      This writes translation/records/*.jsonl and reports BLEU and chrF++.
+#
+#   2. In this environment, score what was generated. RESUME=true reads the
+#      translations off disk, so nothing is regenerated and the served model
+#      does not need to be running:
+#        MODALITY=none TRANSLATION_EVAL=true XCOMET=true RESUME=true \
+#        ... ./run_eval.sh
+#
+# XCOMET-XXL is 10.7B and gated: accept the licence at
+# huggingface.co/Unbabel/XCOMET-XXL with the account behind HF_TOKEN, and give
+# it a free GPU. XCOMET_MODEL=Unbabel/XCOMET-XL (3.5B) is a lighter option.
+#
+# torch is unpinned: install the build that matches your CUDA version, from
+# pytorch.org, before this file if you need a specific one.
+
+unbabel-comet==2.2.7
+
+# The harness modules imported by the translation pass. Kept in step with
+# unbabel-comet's own ceilings rather than the main file's versions.
+pandas
+openpyxl
+python-dotenv
+tqdm
+httpx
+openai
+sacrebleu

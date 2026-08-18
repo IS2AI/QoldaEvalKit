@@ -1,0 +1,42 @@
+# Secrets — the judge and Hugging Face tokens live here.
+# .env.example is committed as the template; .env never is.
+.env
+.env.local
+
+# Evaluation output: records, summaries, judge batch files, run logs.
+# Every run rewrites these and they grow large, so the whole tree stays out.
+results/
+
+# Logs from any run, wherever they land.
+*.log
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+uv_*/
+qolda-avl-evals/
+xcomet-env/
+
+# Model / metric caches that some runs drop in the working directory
+.cache/
+huggingface/
+lightning_logs/
+
+# Editors and OS
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store

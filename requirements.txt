@@ -1,0 +1,63 @@
+# KazakhEvalKit — evaluation harness dependencies.
+#
+#     pip install -r requirements.txt
+#
+# This installs everything needed to run text, vision, audio, safety and
+# translation *generation*, and every metric that is computed locally:
+# accuracy, symbolic math, WER, BLEU and chrF++.
+#
+# Two things are deliberately NOT here:
+#
+#   vllm            — serves the model under test. Its build is tied to your
+#                     CUDA driver and GPU, so install it separately, matched to
+#                     the machine. The harness only talks to it over HTTP.
+#
+#   unbabel-comet   — the XCOMET translation metric. It CANNOT coexist with the
+#                     versions below: it requires huggingface-hub<1.0,
+#                     transformers<5.0 and numpy<2.0, while transformers 5.x
+#                     requires huggingface-hub>=1.5. Installing it here silently
+#                     downgrades numpy and transformers and breaks datasets.
+#                     Use requirements-xcomet.txt in a SEPARATE environment; see
+#                     that file for how to run the two passes.
+#                     Without it, translation still reports BLEU and chrF++.
+#
+# Requires Python >= 3.12 (scipy 1.18 and pandas 3.0 both drop older).
+# Resolution verified on 3.12, 3.13 and 3.14.
+#
+# Versions are pinned to what was resolved and tested together, so a fresh
+# machine gets the same set rather than whatever is newest that day.
+#
+# NOTE: math-verify is the LaTeX-aware layer the symbolic checker tries before
+# falling back to sympy. Without it, PolyMath scores lower, because answers it
+# would have resolved are counted unscorable instead.
+
+# --- talking to the served model and to the judge --------------------------
+openai==3.1.0
+httpx==0.28.1
+
+# --- benchmark data --------------------------------------------------------
+datasets==5.0.1
+huggingface-hub==1.27.0
+pandas==3.0.5
+openpyxl==3.1.5          # pandas reads the Qorgau .xlsx through this
+pyarrow==25.0.1
+transformers==5.9.0
+
+# --- media -----------------------------------------------------------------
+pillow==12.3.0           # image decode and resize
+soundfile==0.14.0        # audio decode and WAV encode
+soxr==1.1.0              # high-quality resampling to 16 kHz
+scipy==1.18.0            # fallback resampler when soxr is unavailable
+numpy==2.5.2
+
+# --- scoring ---------------------------------------------------------------
+sympy==1.14.0            # symbolic answer checking (PolyMath)
+math-verify==0.9.0       # LaTeX-aware equivalence, on top of sympy
+sacrebleu==2.6.0         # BLEU and chrF++ for translation
+
+# --- plumbing --------------------------------------------------------------
+tqdm==4.70.0
+python-dotenv==1.2.2     # reads .env for HF_TOKEN / JUDGE_API_KEY
+
+
+
