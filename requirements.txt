@@ -1,4 +1,4 @@
-# KazakhEvalKit — evaluation harness dependencies.
+# QoldaEvalKit — evaluation harness dependencies.
 #
 #     pip install -r requirements.txt
 #
