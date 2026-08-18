@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# KazakhEvalKit — one runner for every modality. See README.md.
+# QoldaEvalKit — one runner for every modality. See README.md.
 #
 #   MODALITY=all ./run_eval.sh
 #   MODALITY=text,vision ./run_eval.sh                 # everything but audio
